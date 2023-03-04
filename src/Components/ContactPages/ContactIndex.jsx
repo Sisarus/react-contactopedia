@@ -53,10 +53,12 @@ class ContactIndex extends React.Component{
               <AddContact/>
             </div>
             <div className='row py-2'>
-              <FavoriteContacts/>
+              <FavoriteContacts
+              contacts={this.state.contacList.filter((u)=> u.isFavorite===true)}/>
             </div>
             <div className='row py-2'>
-              <GeneralContacts/>
+              <GeneralContacts
+              contacts={this.state.contacList.filter((u)=> u.isFavorite===false)}/>
             </div>
           </div>
         </div>
