@@ -11,6 +11,7 @@ const FavoriteContacts = (props) => {
           <Contact contact={contact} key={index}
           favoriteClick={props.favoriteClick}
           deleteClick={props.deleteClick}
+          updateClick={props.updateClick}
           ></Contact>
         ))
       }

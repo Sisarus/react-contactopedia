@@ -10,7 +10,9 @@ const GeneralContacts = (props) => {
       {props.contacts.map((contact, index)=>(
           <Contact contact={contact} key={index}
           favoriteClick={props.favoriteClick}
-          deleteClick={props.deleteClick}></Contact>
+          deleteClick={props.deleteClick}
+          updateClick={props.updateClick}
+          ></Contact>
         ))
       }
       </div>

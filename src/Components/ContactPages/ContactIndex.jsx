@@ -33,8 +33,10 @@ class ContactIndex extends React.Component{
           email: "April.Ludgate@pawnee.com",
           isFavorite: false,
         }
-      ]
-    }
+      ],
+      selectedContact: undefined,
+      isUpdating: false
+    };
   }
 
   handleAddContact = (newContact) => {
@@ -112,6 +114,17 @@ class ContactIndex extends React.Component{
     });
   };
 
+  
+  handleUpdateClick = (contact) => {
+    console.log(contact);
+    this.setState((prevState) => {
+      return {
+        selectedContact: contact,
+        isUpdating: true
+      };
+    });
+  };  
+
   render(){
     return(
       <div>
@@ -119,14 +132,18 @@ class ContactIndex extends React.Component{
         <div className='container' style={{minHeight: '85vh'}}>
           <div className='row py-3'>
             <div className='col-4 offset-2 row'>
-              <AddRandomContact handleAddRandomContact={this.handleAddRandomContact}/>
+              <AddRandomContact
+              handleAddRandomContact={this.handleAddRandomContact}/>
             </div>
             <div className='col-4 row'>
               <RemoveAllContact handleRemoveAllContacts={this.handleRemoveAllContacts}/>
             </div>
             <div className='row py-2'>
               <div className='col-8 offset-2 row'>
-                <AddContact handleAddContact={this.handleAddContact}/>
+                <AddContact
+                isUpdating={this.state.isUpdating}
+                selectedContact={this.state.selectedContact}
+                handleAddContact={this.handleAddContact}/>
               </div>
             </div>
             <div className='row py-2'>
@@ -135,6 +152,7 @@ class ContactIndex extends React.Component{
                 contacts={this.state.contactList.filter((u)=> u.isFavorite===true)}
                 favoriteClick={this.handleToggleFavorites}
                 deleteClick={this.handleDeleteContact}
+                updateClick={this.handleUpdateClick}
                 />
               </div>
             </div>
@@ -144,6 +162,7 @@ class ContactIndex extends React.Component{
                 contacts={this.state.contactList.filter((u)=> u.isFavorite===false)}
                 favoriteClick={this.handleToggleFavorites}
                 deleteClick={this.handleDeleteContact}
+                updateClick={this.handleUpdateClick}
                 />
               </div>
             </div>
