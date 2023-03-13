@@ -68,6 +68,33 @@ class ContactIndex extends React.Component{
     }
   };
 
+  handleUpdateContact = (updatedContact) => {
+    console.log(updatedContact);
+    if(updatedContact.name === "") {
+      return {status: 'failure', msg:"Pleace Enter a valid name"};
+    } else if(updatedContact.phone===""){
+      return {status: 'failure', msg:"Pleace Enter a Phone number"};
+    }
+    this.setState((prevState) => {
+      return{
+        contactList: prevState.contactList.map((obj) => {
+          if(obj.id === Number(updatedContact.id)) {
+            return{
+              ...obj,
+              name: updatedContact.name,
+              email: updatedContact.email,
+              phone: updatedContact.phone,
+            }
+          }
+          return obj;
+        }),
+        isUpdating: false,
+        selectedContact: undefined
+      };
+    });
+    return {status: 'success', msg: 'Contact was updated successfully'};
+  };
+
   handleToggleFavorites = (contact) => {
     // console.log(contact);
     this.setState((prevState) => {
@@ -124,6 +151,15 @@ class ContactIndex extends React.Component{
       };
     });
   };  
+  
+  handleCancelUpdateContact = () => {
+    this.setState((prevState) => {
+      return {
+        selectedContact: undefined,
+        isUpdating: false
+      };
+    });
+  };  
 
   render(){
     return(
@@ -143,7 +179,10 @@ class ContactIndex extends React.Component{
                 <AddContact
                 isUpdating={this.state.isUpdating}
                 selectedContact={this.state.selectedContact}
-                handleAddContact={this.handleAddContact}/>
+                handleAddContact={this.handleAddContact}
+                cancelUpdateContact={this.handleCancelUpdateContact}
+                handleUpdateContact={this.handleUpdateContact}
+                />
               </div>
             </div>
             <div className='row py-2'>
