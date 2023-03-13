@@ -11,12 +11,12 @@ class AddContact extends React.Component {
 
   handleAddContactFormSubmit = (e) => {
     e.preventDefault();
-    const name =e.target.elements.contactName.value.trim();
-    const email =e.target.elements.contactEmail.value.trim();
-    const phone =e.target.elements.contactPhone.value.trim();
+    const name = e.target.elements.contactName.value.trim();
+    const email = e.target.elements.contactEmail.value.trim();
+    const phone = e.target.elements.contactPhone.value.trim();
     const response = this.props.handleAddContact({name: name, email: email, phone: phone});
 
-    if(response.status=='success'){
+    if(response.status === 'success'){
       this.setState({errorMessage: undefined, successMessage: response.msg});
       document.querySelector('.contact-form').reset();
     } else {
@@ -39,12 +39,12 @@ class AddContact extends React.Component {
             <div className="col-12 col-md-4 p-1">
               <input className="form-control form-control-sm" placeholder="Phone..." type="text" name="contactPhone"></input>
             </div>
-            {this.state.errorMessage==undefined ? (<div></div>):
+            {this.state.errorMessage===undefined ? (<div></div>):
               <div className="col-12 text-center text-danger">
                 {this.state.errorMessage}
               </div>
             }
-            {this.state.successMessage==undefined ? (<div></div>):
+            {this.state.successMessage===undefined ? (<div></div>):
               <div className="col-12 text-center text-success">
                 {this.state.successMessage}
               </div>

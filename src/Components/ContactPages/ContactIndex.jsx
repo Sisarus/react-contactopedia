@@ -84,9 +84,30 @@ class ContactIndex extends React.Component{
     console.log('Delete ' + contact);
     this.setState((prevState) => {
       return {
-        contactList: prevState.contactList.filter((obj) => {
-          return obj.id != contact.id;
+          contactList: prevState.contactList.filter((obj) => {
+          return obj.id !== contact.id;
         })
+      };
+    });
+  };
+
+  handleAddRandomContact = (newContact) => {
+    const newFinalContact = {
+      ...newContact,
+      id: this.state.contactList[this.state.contactList.length-1].id + 1,
+      isFavorite: false,
+    };
+    this.setState((prevState)=>{
+      return{
+        contactList: prevState.contactList.concat([newFinalContact])
+      };
+    });
+  };
+
+  handleRemoveAllContacts = () => {
+    this.setState((prevState) => {
+      return {
+        contactList:[]
       };
     });
   };
@@ -97,11 +118,11 @@ class ContactIndex extends React.Component{
         <Header/>
         <div className='container' style={{minHeight: '85vh'}}>
           <div className='row py-3'>
-            <div className='col-4 offset-2'>
-              <AddRandomContact/>
+            <div className='col-4 offset-2 row'>
+              <AddRandomContact handleAddRandomContact={this.handleAddRandomContact}/>
             </div>
-            <div className='col-4'>
-              <RemoveAllContact/>
+            <div className='col-4 row'>
+              <RemoveAllContact handleRemoveAllContacts={this.handleRemoveAllContacts}/>
             </div>
             <div className='row py-2'>
               <div className='col-8 offset-2 row'>
