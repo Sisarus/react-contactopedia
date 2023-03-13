@@ -38,13 +38,13 @@ class ContactIndex extends React.Component{
   }
 
   handleAddContact = (newContact) => {
-    if(newContact.name==""){
+    if(newContact.name===""){
       return {status: 'failure', msg:"Pleace Enter a valid name"};
-    } else if(newContact.phone==""){
+    } else if(newContact.phone===""){
       return {status: 'failure', msg:"Pleace Enter a Phone number"};
     }
-    const duolicateRecord = this.state.contactList.filter((x)=>{
-      if(x.name==newContact.name && x.phone==newContact.phone){
+    const duolicateRecord = this.state.contactList.filter((x) => {
+      if(x.name === newContact.name && x.phone === newContact.phone) {
         return true;
       }
     });
@@ -64,6 +64,31 @@ class ContactIndex extends React.Component{
       });
       return {status: 'success', msg: 'Contact was added successfully'};
     }
+  };
+
+  handleToggleFavorites = (contact) => {
+    // console.log(contact);
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.map((obj) => {
+          if(obj.id === contact.id) {
+            return {...obj, isFavorite: !obj.isFavorite};
+          }
+          return obj;
+        })
+      };
+    });
+  };
+
+  handleDeleteContact = (contact) => {
+    console.log('Delete ' + contact);
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.filter((obj) => {
+          return obj.id != contact.id;
+        })
+      };
+    });
   };
 
   render(){
@@ -86,13 +111,19 @@ class ContactIndex extends React.Component{
             <div className='row py-2'>
               <div className='col-8 offset-2 row'>
                 <FavoriteContacts
-                contacts={this.state.contactList.filter((u)=> u.isFavorite===true)}/>
+                contacts={this.state.contactList.filter((u)=> u.isFavorite===true)}
+                favoriteClick={this.handleToggleFavorites}
+                deleteClick={this.handleDeleteContact}
+                />
               </div>
             </div>
             <div className='row py-2'>
               <div className='col-8 offset-2 row'>
                 <GeneralContacts
-                contacts={this.state.contactList.filter((u)=> u.isFavorite===false)}/>
+                contacts={this.state.contactList.filter((u)=> u.isFavorite===false)}
+                favoriteClick={this.handleToggleFavorites}
+                deleteClick={this.handleDeleteContact}
+                />
               </div>
             </div>
           </div>
