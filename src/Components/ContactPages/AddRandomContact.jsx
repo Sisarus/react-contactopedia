@@ -1,5 +1,5 @@
 import React from "react";
-import { getRandomUser } from "../../Utility/api";
+import { getRandomUser } from "../../utility/api";
 
 const GetRandomContact = async (props) => {
   const responseFromAPI = await getRandomUser();

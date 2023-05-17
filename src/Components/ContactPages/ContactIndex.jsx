@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../Layout/Header';
+import Header from '../layout/Header';
 import AddRandomContact from './AddRandomContact';
 import RemoveAllContact from './RemoveAllContact';
 import AddContact from './AddContact';
 import FavoriteContacts from './FavoriteContacts';
 import GeneralContacts from './GeneralContacts';
-import Footer from '../Layout/Footer';
+import Footer from '../layout/Footer';
 
 class ContactIndex extends React.Component{
   constructor(props){

@@ -1,12 +1,10 @@
 
 
-## Available Scripts
+## Setup
 
 Clone project and then install node modules. Nodejs version 16.0.0
 ```
 npm install
-```
-```
 npm start
 ```
 Runs the app in the development mode.\
